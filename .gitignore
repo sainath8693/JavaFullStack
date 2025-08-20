@@ -22,3 +22,76 @@
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 replay_pid*
+
+# Eclipse-specific files
+.project
+.classpath
+.settings/
+.metadata/
+
+# Eclipse working sets and local history
+.remote-sync.json
+.loadpath
+recommenders/
+*.launch
+
+# Bin and build directories
+bin/
+build/
+
+# Maven / Gradle (if used)
+target/
+.gradle/
+build/
+
+# IntelliJ IDEA (if used alongside Eclipse)
+*.iml
+.idea/
+out/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ----------------------------------------
+# Spring Boot-related
+# ----------------------------------------
+# Spring Boot logs
+spring.log
+
+# Local environment variables
+.env
+.env.*
+
+# Database files
+*.h2.db
+*.mv.db
+
+# ----------------------------------------
+# Maven-related
+# ----------------------------------------
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.jar
+
+# ----------------------------------------
+# Gradle-related
+# ----------------------------------------
+.gradle/
+build/
+!gradle/wrapper/gradle-wrapper.jar
+.gradle-cache/
+gradle-app.setting
+
+# Wrapper files (optional if you want to track them)
+# gradlew
+# gradlew.bat
+# gradle/
