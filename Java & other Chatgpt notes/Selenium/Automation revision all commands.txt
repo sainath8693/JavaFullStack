@@ -1,0 +1,351 @@
+
+System.out.println(driver.getWindowHandle());	//used to get parent window id
+driver.getWindowHandles();
+
+# Manage :
+driver.manage().window().minimize();
+driver.manage().window().maximize();
+driver.manage().window().fullscreen();
+
+# Navigate : 
+driver.navigate().back();
+driver.navigate().forward();
+driver.navigate().refresh();
+driver.navigate().to("url");
+
+##############################################################################
+
+#Search context:- is an interface
+ :- which provides the search mechanism to identify the elements on webpage
+ :- there 2 Abstract methods
+1)findElement()
+* it will find the first element present *) it will find all the first element present in webpage 
+*Return type is webelement 
+*if driver is not able to find element then it will through NosuchElement exception
+
+2)findElements():
+*it will find all the first element presentin webpage
+*Return type is list of webelemen
+*if driver is not able to find elementthen it will through empty list {}
+
+types of locators:
+1)Id()- priority-1
+2)name()- priority-2
+3)classname() no-priority (locator 1 to 6 are direct locator method )
+4)linkText()- priority-3
+5)partialLinkText() priority-3.1
+6)tagname() no-priority
+7)css selector() no-priority ( locators 7-8 are called expressions )
+8)xpath()- priority-4
+
+##############################################################################
+1)Id(): Syntax : id(“attribute value “)
+eg. driver.findElement(By.id("small-searchterm")).sendKeys("books");
+
+2) name( ) : Syntax : By.name(“attribute_value”)
+eg.  driver.findElement(By.name("q")).sendKeys("selenium")
+
+
+3) linkText():	Syntax : linkText(“Text”)
+ *)its should be a text
+ *)there should be no space at starting or ending of the text
+ *)the text should be present in between anchor tag <a>text</a>
+
+
+eg. driver.get("https://demowebshop.tricentis.com/");
+    Thread.sleep(3000);
+    driver.findElement(By.linkText("Register")).click();
+    Thread.sleep(2000);
+    driver.findElement(By.id("gender-male")).click();
+    driver.findElement(By.name("FirstName")).sendKeys("SAINATH PATIL");
+
+
+4) partialLinkText():
+ *)its should be a text
+ *)there should can be space at starting or ending of the text
+ *)the text should be present in between anchor tag <a> text </a>
+ *) Here complete text is not mandatory we can write partial text value.
+Syntax : partialLinkText(“Text”)
+eg.driver.get("https://demowebshop.tricentis.com/");
+    driver.findElement(By.partialLinkText("Apparel & ")).click();
+
+
+5)classname(): we will not perfer classname because there will be lots of duciplate
+eg.  driver.findElement(By.className("email")).sendKeys("sainath@gmail.com");
+
+
+6) tagname():  we will not perfer classname because there will be lots of duciplate
+eg. driver.findElement(By.tagName("input")).sendKeys("books");
+
+
+7)cssSelector():
+*cascading style sheet selector.
+*syntax: tagname[AttributeName='AttributeValue']
+->Dis-adv:
+*)it is unidirectional
+*)we cant identify the based on text function
+
+eg. driver.get("https://demowebshop.tricentis.com/");
+    Thread.sleep(3000);
+    driver.findElement(By.cssSelector("input[name='q']")).sendKeys("books");
+    driver.findElement(By.cssSelector("input[class='button-1 search-box-button']")).click();
+
+
+8)xpath( ) :
+*)xpath by attribute		 syntax: //tagname[@AttributeName='AttributeValue']
+*)xpath by text		 syntax: //tagname[text()='textValue']
+*)xpath contains by attribute	 syntax: //tagname[contains(@AttributeName,'AttributeValue')]
+*)xpath contains by text 	syntax: //tagname[contains(text(),'textValue')]
+
+i) xpath by attribute
+syntax: //tagname[@AttributeName='AttributeValue']
+
+##############################################################################
+
+Web Elements Methods :  the actions that can be perform on the webelements.
+1)sendkeys("values");
+2)click()
+3)clear()
+4)getAttribute()
+5)getText()
+6)getTagname()
+7)getRect()
+8)isDisplayed()
+9)isSelected()
+10)inEnabled()
+11)getCssvalue()
+12)submit
+
+##############################################################################
+
+Select Class:
+*)to handle the dropdown
+*)in your select class there a non static methods
+*)select class will work only the dropdown that are present in Select tagname
+steps:
+1)identify the dropdown & store it
+2)create a object of select class & while create store the dropdown inside the constuctor
+synatx: Select sel= new Select(dropdown webelement);
+3)call the methods that are present inside the select class  i.e.    sel.methods();
+
+types:
+*)single select dropdown
+eg . 	WebElement dropdown=driver.findElement(By.id("products-orderby"));
+       	Select sel= new Select(dropdown);
+   	 List<WebElement> option = sel.getOptions();
+
+*)multi select dropdown
+
+methods:
+1)isMultiple()-Return boolean.this method will come to no dropdown is single select r multi select dropdown
+2)getOptions()- it will fetch all the options that are present in dropdown. return list<webelement>.
+3)selectByIndex():	value='0'
+4)selectByvalue()	value='car'
+5)selectByVisibleText() 	>bike<
+6)deselectByIndex()
+7)deselectByvalue()
+8)deselectByVisibleText()
+9)getAllselectedOptions()
+
+##############################################################################
+Auto suggestion:
+Dynamic Element:   locating path eg. Every Add to cart button is different
+
+##############################################################################
+08-07-2025
+Frame
+Frame:
+*)frame is nothing but a webpage present inside another webpage.
+*)to handle the frame we have to use switchTo().
+syntax: driver.switchTo().frame();
+methods:
+1)using frame index(0)
+2)using name/id of frame("value")
+3)using frame webelement -- store it in variable & then you have give a reference variable
+
+##############################################################################-
+SVG tag
+>svg: scalable vector Graphics
+*)this method is used to design the diagram, graphs in the webpages
+syntax: //*[name()='svg' and @attribute='attributeValue']
+##############################################################################-
+Actions():
+*)it is a class present in selenium which is used to perform mouse over actions
+*)the methods are non static
+
+Step:
+1)identify the elements
+2)Create a object for Actions class & inside the constructor used pass the driver referance
+syntax: Actions actions= new Actions(driver);
+3)we will be calling the methods that are present in actions class & perform()
+syntax: actions.method().perform();
+
+eg. driver.get("https://demowebshop.tricentis.com/");
+    WebElement link = driver.findElement(By.linkText("Register"));
+    Actions actions = new Actions(driver);
+    actions.click(link).perform();
+
+methods:
+==========
+1)click();
+
+2)double click();
+
+3)context click(); this method is used to do right click action on the element
+
+4)dragAndDrop(source, target);   	
+eg: actions.dragAndDrop(source, target).perform();
+
+5)clickAndHold();
+
+6)sendkeys();			
+eg: actions.sendKeys( WebElement , "String").perform();
+
+7)moveToElement(webElement);   this method is used to do mouse over actions
+eg.:actions.moveToElement(ele).perform();
+
+8)scrollByAmount(): this method is used to scroll the window
+actions.scrollByAmount(int X, int Y).perform();
+eg:  actions.scrollByAmount(0, 500).perform(); //scroll window down
+        actions.scrollByAmount(0, -500).perform(); //scroll window up
+
+##############################################################################-
+
+JavaScriptExecutor:
+
+*)its a interface.
+*)javascript code in selenium
+*)its used to scroll,disabled element
+
+methods:
+1)executeScript()
+2)executeAsynScript()
+
+
+1)scrollBy(); this method is used to scroll the window
+
+eg.:driver.get("https://demowebshop.tricentis.com/");
+    JavascriptExecutor js = (JavascriptExecutor) driver;
+    js.executeScript("window.scrollBy(0,500);");
+
+
+2)value(); this method is used to send the values to disabled element
+eg.   
+    JavascriptExecutor js = (JavascriptExecutor) driver;
+    WebElement ele = driver.findElement(By.xpath("//input[@class='form-control']"));
+    js.executeScript("arguments[0].value='selenium';", ele);
+
+##############################################################################-
+TakeScreenShot: create a folder manually in root directory of project before taking screenshot first time
+
+*)it is an interface in selenium
+*)it is used whenever you want to take screen shot in selenium.
+*)whenever script is failed and we want to take Screenshot we take help of TakeScreenShot interface.
+
+we can take a screenshot of:
+1)webpage
+2)webelement
+
+method:
+1)getScreenShotAs();
+
+ChromeDriver driver = new ChromeDriver();
+driver.get("https://demowebshop.tricentis.com/");
+TakesScreenshot ts = (TakesScreenshot) driver;
+File source = ts.getScreenshotAs(OutputType.FILE);
+File target = new File("./screenShot/webpage.png");		// new File(" folderName / fileName ")
+FileHandler.copy(source, target);			// it is used to establish the connection of source and target.
+
+
+# Screenshot of webElement : 
+eg. 
+File source = driver.findElement(By.xpath("//img[@alt='Tricentis Demo WebShop']")).getScreenshotAs(OutputType.FILE);
+File target= new File("./screenShot/webelement.png");
+FileHandler.copy(source, target);
+
+##############################################################################-
+09-07-2025
+
+Synchronisation wait .:
+Synchronisation :we have to match the application loading speed & the automation script execution speed should  get matched
+1)thread.sleep(int); -blind wait
+*)implicit wait
+*)explicit wait -intelligent wait
+*)fluent wait
+
+1)implicit wait:
+*)implicit wait will work for findelement(),findelements(), @findBy
+*)if driver is not able to identify the elements so it will through nosuchelementexecption for findelement() and for  findelements()-emptylist{}
+*) Set It Once at Start. Use when You don’t want to write waits for each element.
+
+synatx:	 driver.manage().timeouts().implicityWait(Duration.ofseconds(int));
+Eg. :  driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+
+
+**************************************************************************************
+2)explicit wait: 
+*)it will work for the condition.
+*)if the conditions is not satisifed it will through an execption-timeoutexecption
+– Use When Needed
+* A button takes time to appear, load, or become clickable.
+* You want to wait for a specific condition.
+
+syntax: 	Webdriverwait wait= new Webdriverwait(driver, Duration.ofseconds(int));
+	wait.until(ExpectedConditions.(condition));
+
+eg.:	WebDriverWait wait= new WebDriverWait(driver, Duration.ofSeconds(3));
+	driver.findElement(By.linkText("Register")).click();
+	wait.until(ExpectedConditions.elementToBeClickable(By.partialLinkText("Jewelry")));
+	driver.findElement(By.id("gender-female")).click();
+
+**************************************************************************************
+3) FluentWait:
+*Use when  You want to customize how often to check, and handle exceptions nicely (advanced use)./When You Need More Control 
+* Use when Element appears randomly or inconsistently. You want to poll every few seconds, and ignore exceptions.
+
+eg.:	FluentWait fw= new FluentWait(driver);
+	fw.withTimeout(Duration.ofSeconds(3)).pollingEvery(Duration.ofMillis(300));
+	driver.findElement(By.linkText("Register")).click();
+	fw.until(ExpectedConditions.elementToBeClickable(By.partialLinkText("Jewelry")));
+	driver.findElement(http://By.id("gender-female")).click();
+	driver.findElement(http://By.id("FirstName")).sendKeys("chandana");
+
+
+##############################################################################-
+Pop-up:
+*)its a GUI-graphical user interface which apper on the window when user open browser.
+1)javascript popup:the popup is created using javascript language.
+
+*)3 types:
+1)Alert Popup
+2)confirmation popup
+3)prompt popup
+
+*)behaviours:
+1)we cannot inspect it
+2)we cannot move this popup
+
+to handle it Alert:
+1)accept()
+2)dismiss()
+3)senkeys()
+
+1)Alert popup:
+*)in the popup will be having only ok button	
+   syntax: driver.switchTo().alert().accept();
+
+2)confirmation popup:
+*)in the popup will be having 2 button
+1)ok button:	syntax: driver.switchTo().alert().accept();
+2)cancel button:	syntax: driver.switchTo().alert().dismiss();
+
+
+3)prompt popup:
+*)will be having 2 button & textbox
+1)ok button	syntax: driver.switchTo().alert().accept();
+2)cancel button	syntax: driver.switchTo().alert().dismiss();
+3)textbox		 syntax: driver.switchTo().alert().sendKeys("values");
+
+
+
+

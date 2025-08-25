@@ -1,0 +1,84 @@
+Sure! Let’s now understand @Service in the same simple way as we did with @Component.
+
+---
+
+ 🟡 What is @Service?
+
+@Service is just like @Component, but it tells Spring:
+
+> “This class contains business logic — treat it as a service.”
+
+It's a specialization of @Component, used to improve code readability and organization.
+
+---
+
+ 🔧 Why use @Service?
+
+You use @Service when:
+
+* The class contains core application logic (like calculations, processing data, etc.).
+* You want to keep a clean structure: controller → service → repository.
+
+---
+
+ ✅ Simple Example
+
+java
+import org.springframework.stereotype.Service;
+
+@Service
+public class CalculatorService {
+    public int add(int a, int b) {
+        return a + b;
+    }
+}
+
+
+Now use this service in another class:
+
+java
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+@Component
+public class MyApp {
+
+    @Autowired
+    CalculatorService calculatorService;
+
+    public void run() {
+        int result = calculatorService.add(5, 3);
+        System.out.println("Result: " + result);  // Prints: Result: 8
+    }
+}
+
+
+Spring automatically creates the CalculatorService object and injects it into MyApp.
+
+---
+
+ 🔍 Difference Between @Component and @Service
+
+| Aspect          | @Component           | @Service                     |
+| --------------- | ---------------------- | ------------------------------ |
+| Meaning         | General-purpose bean   | Business logic / services      |
+| Spring Behavior | Same                   | Same                           |
+| Use Case        | Utility/helper classes | Core logic of your app         |
+| Purpose         | Generic marker         | Semantic (easier to read code) |
+
+⚠️ Both are detected by Spring’s component scanning — the difference is mainly for readability and intent.
+
+---
+
+ 🧱 Typical App Structure
+
+plaintext
+Controller (web/API logic)      →   @Controller
+Service (business logic)        →   @Service
+Repository (database logic)     →   @Repository
+Helper/Utils/Other beans        →   @Component
+
+
+---
+
+Let me know if you'd like to see how @Service works together with @Controller and @Repository in a small project example!

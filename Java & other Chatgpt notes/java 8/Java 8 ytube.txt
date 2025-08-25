@@ -1,0 +1,158 @@
+===========  Purpose of java 8 ===========  
+* Concise and minimal code
+* we were missing functional programming benefits in oops nature. To utilize functional programming benefits in JAVA, java 8 comes. But still it is oops language
+* To enable parallel  programming .
+* More compatible code for multi core processors.
+
+===========  Features of java 8 ===========  
+* Lambda expression - Lambda expression are similar to methods, but they do not need a name and can be implemented right in the body of the method.
+* Stream API : java stream API for bulk data operation on collection.
+* Date and Time API : under the package java.time.  java 8 offer new date and time API
+* Base64 Encode and decode: for base64 coding. Java 8 has built in encode and decode function. The base64 encoding class in java.util.Base64
+* Method reference & constructor reference - :: operator.
+* Default methods in interface & static methods
+* Functional interface.
+* Optional class
+* Java IO imporvement
+* collection API improvements
+
+===========  Benefits of lambda expression  ===========  
+* To enable functional programming
+* To make code more readable, maintaninable and concise code
+* To enable parallel programming
+* JAR file  size  reduction
+* Elimination of shadow variables.
+
+===========  Functional Interface ===========  
+* It is a annonymus function
+* To make the function as a functional interface
+- Remove method name, return type, access specifier & Insert arrow-mark in between parameters and curly brackets.
+- If there is only statement in method body remove curly brackets.
+- type inference : don't need to mention data type in parameters compiler will identify it
+- remove return statement from method body.
+- If the method parameter has only one argument we can remove brackets also.
+
+============  Functional interface ===========  
+* It is a interface having exctly single abstract method but can have any number of default and static methods. 
+* we can invoke lambda expression by using functional interface.
+* we use @FunctionalInterface to mark the interface as Functional interface.
+* If any interface inherit funtional interface then it will also become functional inteface.
+
+===========  Default method inside interface ===========  
+* Until 1.7 only public abstract methods were allowed whether we declare by writting or not. Similarly public static final variables were allowed.
+* Since JAVA 8 we can have conrete methods as well inside interface.
+* Default methods are non static and have body.
+
+===========  Static method in Interface ===========
+* we can access  Static method of interface by using interface name only.
+* If a class extends a interface then also we can not access the static method of interface with class name.
+* A class which inherit interface can not access static methods of interface. therefore we can not inherit them.
+* We can write main method in interface from java 8. , but in older versions we can not wirte main method in interface.
+
+===========  How to use java 8 ===========  
+* implementation class is not required to provide implementation to the interface method.
+* The data type of lambda expression is Interface.
+* eg.  Interface_Name ref = ( ) -> {  };
+
+===========  Default functional interfaces ===========  
+* Default functinal interfaces where we use Lamda expression :
+# Runnable Interface :
+- Runnable interface is a functional interface. i.e. in Runnable interface only one abstract method called Run( )
+- So instead of providing the implementation of run( ) method in another class we can directly provide its implementation by using lamda expression.
+
+# Comparator Interface:
+- Comparate interface it is used to sort the Collection of List, Set, Tree.
+- In comparator interface only single method is present i.e. sort(int a, int b) method 
+- its implementation is (a, b) -> {a - b};  it is a default for assending sort
+- its implementation is ( a, b ) -> { b - a }; it is for sort the Collection in desceding order.
+
+===========  Annonymos Inner Class ===========  
+* Annonymos inner class : In the functional interface we can write write only one mehtod but in this we can wirte multiple methods and provide there implementation.
+* Annonymous class has its Global variables which we can use inside annonymou block only. that means it work like a separate class with no name.
+* we can not access the global variables of the other class in Annonymous class.
+ 
+
+===========  Predicate ===========  
+* It is used to check the condition.
+* It is a functional interface present in Java.util.functions.Predicate
+* It return boolean valued data
+* boolean test ( T ) it is a abstract method present in Predicate interface.
+eg.   Predicate<Integer>  ref = x -> x>10000; 
+        ref.test(1000);			  it will return boolean value.
+* Methods present in Predicate interface are    ===>    or(), and(),  
+-  isEqual() : it is a static method which is used to compare data of two objects or strings
+
+* stream( ) : by using stream we can work deal with collection.
+* filter( Predicate ) : is used to filter the collection.
+
+===========  Function ===========  
+* import java.util.function.Function
+* It is used to perform some operation. The non static method of Function interface is apply( ) method.
+* Function< Input_type, output_type >  i.e. Function<Input,return>
+eg. Function <String, Integer> stringLength = x -> x.length() ;
+       stringLength.appply("Sainath");			// it will return the lenght of string.
+
+* Default methods of Function interface are as follows:
+- andThen( ) : it execute the function_1 first and then function_2 will execute.
+- It will create new Function.
+eg. Function<Integer, Integer> function1 = x -> x*2 ;
+       Function<Integer, Integer> function2 = x -> x*x*x ;
+       syso( function1.andThen(function2).apply(3) );	//216
+
+- compose() : It will execute function_2 first then function_1 will execute.
+eg. Function<String, String> function1 = x -> x.toUppercase();
+       Function<String, String> function2 = x -> x.subString();
+
+
+* Static method.
+
+===========  Consumer ===========  
+* import java.util.function.Consumer
+* non static method of consumer interface is accept() 
+* return type of accept() method is void. It is just used to consume.
+eg.
+Function <Integer> ref = x -> syso(x) ;
+ref.accept( 39 ) ;			// 39
+
+* Default method of consumer is andThen( )  it work same as work in Function interface.
+eg. Consumer<T >  ref =  function1.andThen(function2);
+
+===========  Supplier ===========  
+* import java.util.function.Supplier
+* There is no any static and default methods present in Supplier interface.
+* only non static method is present in Supplier interface i.e. get()
+* get( ) it doesn't take any parameters. It only return the any type of data (supply only)
+eg.  Predicate<Integer> predicate = x -> x%2 == 0;
+       Function<Integer> function = x ->x*x;
+       Consumer <Interger> consumer = x -> syso(x);
+       Supplier <Integer> supplier = () -> 100;
+
+if(predicate.test( supplier.get() ) )
+{
+	function.apply(consumer.accept() );
+}
+
+===========  BiFunction, BiPredicate , BiConsumer ===========  
+* It can take two arguments in a input parameter
+
+===========  UnaryOperator in java 8 ===========  
+* import java.util.function.UnaryOperator;
+* It is used for Function interface
+* function( T, R )  it takes two arguments T = input type & R = return type
+* if input and output type is same we use UnaryOperator.
+* in UnaryOperator we don't need to write both input and output type if they are same we can mention the data type only once. i.e 
+eg. Function<Integer, Integer>  function = x -> x*x ;
+       function.apply( 5 );
+
+      UnaryOperator <Integer> unaryOperator = x -> x*x ;
+      unaryOperator.apply ( 5 );
+
+
+
+
+
+
+
+
+
+

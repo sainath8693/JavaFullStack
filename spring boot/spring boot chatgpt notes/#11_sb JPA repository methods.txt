@@ -1,0 +1,144 @@
+In Spring Boot, when using Spring Data JPA, you often work with JPA repositories to interact with the database. These repositories help you perform common database operations like saving, updating, deleting, and retrieving records without writing much code.
+
+Here’s a breakdown of the commonly used JPA Repository methods with simple explanations:
+
+---
+
+### 🧩 1. save(entity)
+
+What it does:
+Saves a given entity (new or existing) into the database.
+
+Example:
+
+java
+userRepository.save(user);
+
+
+* If user is new → it inserts it.
+* If user already exists (by ID) → it updates it.
+
+---
+
+### 🧩 2. findById(id)
+
+What it does:
+Finds a record by its ID (primary key). Returns Optional.
+
+Example:
+
+java
+Optional<User> user = userRepository.findById(1L);
+
+
+---
+
+### 🧩 3. findAll()
+
+What it does:
+Returns all records from the table.
+
+Example:
+
+java
+List<User> users = userRepository.findAll();
+
+
+---
+
+### 🧩 4. deleteById(id)
+
+What it does:
+Deletes a record with the given ID.
+
+Example:
+
+java
+userRepository.deleteById(1L);
+
+
+---
+
+### 🧩 5. delete(entity)
+
+What it does:
+Deletes the given entity (record) directly.
+
+Example:
+
+java
+userRepository.delete(user);
+
+
+---
+
+### 🧩 6. count()
+
+What it does:
+Returns the total number of records in the table.
+
+Example:
+
+java
+long count = userRepository.count();
+
+
+---
+
+### 🧩 7. existsById(id)
+
+What it does:
+Checks if a record exists for the given ID.
+
+Example:
+
+java
+boolean exists = userRepository.existsById(1L);
+
+
+---
+
+### 🧩 8. findAllById(Iterable<ID> ids)
+
+What it does:
+Finds multiple records by a list of IDs.
+
+Example:
+
+java
+List<User> users = userRepository.findAllById(List.of(1L, 2L, 3L));
+
+
+---
+
+### ✅ Custom Finder Methods (By Naming Convention)
+
+Spring Data JPA also allows you to define your own methods using naming conventions.
+
+#### Examples:
+
+* findByEmail(String email) → Find user by email.
+* findByUsernameAndPassword(String username, String password) → Find by two fields.
+* findTop3ByOrderByCreatedDateDesc() → Get latest 3 records.
+
+These methods work automatically — Spring figures out the SQL based on the method name.
+
+---
+
+### Summary Table
+
+| Method                 | What it does                   |
+| ---------------------- | ------------------------------ |
+| save(entity)         | Insert or update a record      |
+| findById(id)         | Get record by ID               |
+| findAll()            | Get all records                |
+| deleteById(id)       | Delete by ID                   |
+| delete(entity)       | Delete the given entity        |
+| count()              | Total number of records        |
+| existsById(id)       | Check if record exists by ID   |
+| findAllById(ids)     | Find multiple records by IDs   |
+| findByFieldName(...) | Custom query based on field(s) |
+
+---
+
+If you'd like, I can also explain how to create a custom query using @Query or projection techniques.

@@ -1,0 +1,49 @@
+Sure! Let me break it down for you.
+
+### What you have:
+
+```java
+private List<String> subjects;
+```
+
+Here, you have declared a **private** variable `subjects` which is a list of strings. This list will hold multiple **subject names** (for example, "Math", "Science", etc.).
+
+### What your `toString()` method does:
+
+```java
+@Override
+public String toString() {
+    return subjects.toString();
+}
+```
+
+* The `@Override` annotation means you're overriding the `toString()` method that is inherited from the `Object` class. This method is called when you try to print an instance of your class, or when you try to convert an object into a string.
+
+* `subjects.toString()` is calling the `toString()` method of the **`List<String>`** class. This method, by default, converts the list to a string representation where each element is enclosed in square brackets and separated by commas. For example:
+
+  * If `subjects = ["Math", "Science", "History"]`, the `toString()` method of the list would return `"[Math, Science, History]"`.
+
+### How it works:
+
+1. If you create an object of your class (which has the `subjects` list) and you print it using `System.out.println()` or any other string operation, Java will automatically call your overridden `toString()` method.
+
+2. Inside your `toString()` method, you are returning the string representation of the `subjects` list using `subjects.toString()`.
+
+   So, the output will look like this:
+
+   ```java
+   System.out.println(yourObject); // This will print the string form of the subjects list
+   ```
+
+   If `subjects = ["Math", "Science", "History"]`, the output will be:
+
+   ```
+   [Math, Science, History]
+   ```
+
+### In simple words:
+
+* When you print your object, the `toString()` method is called.
+* It returns the string representation of the `subjects` list, which is just a comma-separated list of the subject names in square brackets.
+
+Does that clear things up?

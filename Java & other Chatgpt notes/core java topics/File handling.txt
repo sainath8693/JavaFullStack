@@ -1,0 +1,325 @@
+{
+FileInputStream fis = new FileInputStream("source.txt");
+FileOutputStream fos = new FileOutputStream("destination.txt");
+int byteData;
+while ((byteData = fis.read()) != -1) {
+fos.write(byteData);
+}
+fis.close();
+fos.close();
+}
+}
+
+
+
+Using Files.copy() in Java 7 and later:
+java
+import java.nio.file.*;
+
+public class FileCopy {
+    public static void main(String[] args) throws IOException {
+        Path source = Paths.get("source.txt");
+        Path destination = Paths.get("destination.txt");
+        Files.copy(source, destination, StandardCopyOption.REPLACE_EXISTING);
+    }
+}
+
+
+---
+Certainly! Here are more Java File Handling Interview Questions to help you further prepare:
+
+---
+
+ 1. What is the difference between FileReader and BufferedReader?
+
+Answer:
+
+* FileReader is used for reading character files, but it reads characters one at a time, which might not be efficient for larger files.
+* BufferedReader is used in conjunction with FileReader (or other Reader objects) to buffer input for faster reading. It reads large chunks of data into a buffer and provides a readLine() method for reading a line at a time.
+
+Example using BufferedReader:
+
+java
+BufferedReader br = new BufferedReader(new FileReader("file.txt"));
+String line;
+while ((line = br.readLine()) != null) {
+    System.out.println(line);
+}
+br.close();
+
+
+---
+
+ 2. What is FileNotFoundException?
+
+Answer:
+FileNotFoundException is an exception that occurs when attempting to open a file that does not exist or is inaccessible. It is a subclass of IOException and can be caught to handle cases where a file cannot be found.
+
+Example:
+
+java
+try {
+    FileReader fr = new FileReader("nonexistent.txt");
+} catch (FileNotFoundException e) {
+    System.out.println("The file was not found.");
+}
+
+
+---
+
+ 3. What is the File.separator constant in Java?
+
+Answer:
+File.separator is a platform-independent way to represent the system-specific file separator (e.g., "/" on Unix-based systems or "\\" on Windows). It ensures portability when constructing file paths in Java.
+
+Example:
+
+java
+String filePath = "folder" + File.separator + "file.txt";
+
+
+---
+
+ 4. What is the purpose of flush() method in file handling?
+
+Answer:
+The flush() method is used to ensure that any buffered data in the output stream is actually written to the underlying file or destination. It forces any data that has been buffered in memory to be written to the file, without closing the stream.
+
+Example:
+
+java
+BufferedWriter bw = new BufferedWriter(new FileWriter("file.txt"));
+bw.write("Hello");
+bw.flush();  // Ensures data is written to the file immediately
+bw.close();
+
+
+---
+
+ 5. How do you create a directory in Java?
+
+Answer:
+You can create a directory using the mkdir() or mkdirs() methods of the File class. mkdir() creates a single directory, while mkdirs() creates both the directory and any necessary parent directories.
+
+Example:
+
+java
+File directory = new File("newDirectory");
+if (directory.mkdir()) {
+    System.out.println("Directory created.");
+} else {
+    System.out.println("Directory creation failed.");
+}
+
+
+---
+
+ 6. How can you rename a file in Java?
+
+Answer:
+You can rename a file using the renameTo() method of the File class. It takes a new File object representing the new name or location.
+
+Example:
+
+java
+File oldFile = new File("oldFile.txt");
+File newFile = new File("newFile.txt");
+if (oldFile.renameTo(newFile)) {
+    System.out.println("File renamed successfully.");
+} else {
+    System.out.println("File renaming failed.");
+}
+
+
+---
+
+ 7. How do you check if a file is a directory or a file in Java?
+
+Answer:
+You can use the isFile() and isDirectory() methods of the File class to check whether a path represents a file or a directory.
+
+Example:
+
+java
+File file = new File("example.txt");
+if (file.isFile()) {
+    System.out.println("It is a file.");
+} else if (file.isDirectory()) {
+    System.out.println("It is a directory.");
+} else {
+    System.out.println("It is neither a file nor a directory.");
+}
+
+
+---
+
+ 8. What is the Files.exists() method used for?
+
+Answer:
+The Files.exists() method checks if a file or directory exists in the file system. It returns true if the path exists, otherwise it returns false.
+
+Example:
+
+java
+Path path = Paths.get("file.txt");
+if (Files.exists(path)) {
+    System.out.println("File exists.");
+} else {
+    System.out.println("File does not exist.");
+}
+
+
+---
+
+ 9. How can you read a file line by line in Java?
+
+Answer:
+You can read a file line by line using a BufferedReader with the readLine() method.
+
+Example:
+
+java
+import java.io.*;
+
+public class ReadFile {
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new FileReader("file.txt"));
+        String line;
+        while ((line = br.readLine()) != null) {
+            System.out.println(line);
+        }
+        br.close();
+    }
+}
+
+
+---
+
+ 10. How do you append data to a file in Java?
+
+Answer:
+You can append data to a file by opening the FileWriter in append mode using the second parameter as true.
+
+Example:
+
+java
+FileWriter fw = new FileWriter("output.txt", true);  // true for append mode
+fw.write("Appended text\n");
+fw.close();
+
+
+---
+
+ 11. What is the Files.copy() method used for in Java?
+
+Answer:
+The Files.copy() method in Java is used to copy files from one location to another. It is a more efficient way of copying files than using streams, and it is part of the java.nio.file.Files class.
+
+Example:
+
+java
+import java.nio.file.*;
+
+public class FileCopyExample {
+    public static void main(String[] args) throws IOException {
+        Path source = Paths.get("source.txt");
+        Path destination = Paths.get("destination.txt");
+        Files.copy(source, destination, StandardCopyOption.REPLACE_EXISTING);
+    }
+}
+
+
+---
+
+ 12. What is the difference between read() and readLine() methods?
+
+Answer:
+
+* read(): Reads one character at a time from a file (or one byte in case of InputStream).
+
+  Example:
+
+  java
+  int data = fr.read();  // Reads one character at a time
+  
+
+* readLine(): Reads an entire line of text from the file. This is used with BufferedReader.
+
+  Example:
+
+  java
+  String line = br.readLine();  // Reads one line at a time
+  
+
+---
+
+ 13. What is the Path class in Java?
+
+Answer:
+The Path class is part of the java.nio.file package and represents a file or directory path. It is used in modern Java file I/O for handling file system operations such as reading, writing, and copying files.
+
+Example:
+
+java
+import java.nio.file.*;
+
+Path path = Paths.get("file.txt");
+if (Files.exists(path)) {
+    System.out.println("File exists.");
+}
+
+
+---
+
+ 14. How do you list files in a directory in Java?
+
+Answer:
+You can list all the files in a directory using the listFiles() method of the File class.
+
+Example:
+
+java
+File directory = new File("myDirectory");
+File[] files = directory.listFiles();
+for (File file : files) {
+    System.out.println(file.getName());
+}
+
+
+---
+
+ 15. What is the difference between delete() and deleteOnExit() methods?
+
+Answer:
+
+* delete(): Deletes the file immediately if it exists. It returns true if the deletion was successful, and false otherwise.
+
+* deleteOnExit(): Marks the file to be deleted when the JVM terminates. The file is not immediately deleted but will be deleted when the JVM shuts down.
+
+Example of deleteOnExit():
+
+java
+File file = new File("temp.txt");
+file.deleteOnExit();  // Deletes the file when the JVM exits
+
+
+---
+
+ 16. How do you handle file encoding in Java when reading/writing files?
+
+Answer:
+When reading or writing files with a specific encoding, you can use InputStreamReader and OutputStreamWriter for character streams, or use BufferedReader and BufferedWriter with encoding specified.
+
+Example:
+
+java
+InputStreamReader reader = new InputStreamReader(new FileInputStream("file.txt"), "UTF-8");
+BufferedReader br = new BufferedReader(reader);
+
+OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream("output.txt"), "UTF-8");
+BufferedWriter bw = new BufferedWriter(writer);
+
+
+---
+
+These additional questions should help you cover a broader range of topics related to file handling in Java.

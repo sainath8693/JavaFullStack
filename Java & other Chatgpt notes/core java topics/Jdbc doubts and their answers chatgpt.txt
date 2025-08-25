@@ -1,0 +1,187 @@
+Great question — understanding RowMapper is key to mastering Spring JDBC for SELECT operations. Let’s break it down clearly and practically.
+
+---
+
+## ✅ What is a RowMapper?
+
+A RowMapper<T> is a Spring interface that maps each row of a ResultSet to a Java object of type T.
+
+ Why we need it:
+
+When we execute a SELECT query, the result is a ResultSet — basically, a table of rows. RowMapper tells Spring how to convert each row into a Java object.
+
+---
+
+## ✅ RowMapper Interface
+
+java
+public interface RowMapper<T> {
+    T mapRow(ResultSet rs, int rowNum) throws SQLException;
+}
+
+
+* rs: The current row in the ResultSet
+* rowNum: The current row number (0-based)
+* You return an object that represents that row (e.g., a User object)
+
+---
+
+## 🔧 Example: Manual RowMapper for a User class
+
+ Java model:
+
+java
+public class User {
+    private int id;
+    private String name;
+    private String email;
+    
+    // getters and setters
+}
+
+
+ RowMapper implementation:
+
+java
+public class UserRowMapper implements RowMapper<User> {
+    @Override
+    public User mapRow(ResultSet rs, int rowNum) throws SQLException {
+        User user = new User();
+        user.setId(rs.getInt("id"));
+        user.setName(rs.getString("name"));
+        user.setEmail(rs.getString("email"));
+        return user;
+    }
+}
+
+
+---
+
+## ✅ Using RowMapper in a SELECT query
+
+java
+String sql = "SELECT * FROM users WHERE id = ?";
+User user = jdbcTemplate.queryForObject(sql, new UserRowMapper(), 1);
+
+
+* queryForObject() runs the query
+* UserRowMapper() maps the row to a User object
+* 1 is the value for the ? in the SQL
+
+---
+
+## ✅ Shortcut: BeanPropertyRowMapper
+
+If your table columns match your Java field names, you can avoid writing a custom RowMapper.
+
+java
+User user = jdbcTemplate.queryForObject(
+    "SELECT * FROM users WHERE id = ?",
+    new BeanPropertyRowMapper<>(User.class),
+    1
+);
+
+
+Spring automatically maps:
+
+* column id → field id
+* column name → field name
+* column email → field email
+
+---
+
+## 🧠 Summary
+
+| Concept        | Explanation                                                 |
+| -------------- | ----------------------------------------------------------- |
+| RowMapper<T> | Maps one row from SQL result into a Java object             |
+| mapRow()     | Method you implement to define how to map each column       |
+| When used      | In SELECT queries like query() or queryForObject()    |
+| Shortcut       | Use BeanPropertyRowMapper if column and field names match |
+
+---
+
+Let me know if you want a full example with DAO and database schema too!
+
+==============================================================================
+Q2.  what is setDataSource( ) method in spring jdbc what it does
+
+In Spring JDBC, the setDataSource() method is typically used to inject a DataSource into a JDBC-related component, such as a JdbcTemplate or a DAO (Data Access Object). It’s a setter method that allows Spring to provide the database connection details to the class that needs to perform JDBC operations.
+
+---
+
+ 🔍 What is DataSource?
+
+* DataSource is a standard interface in JDBC (from javax.sql.DataSource) that represents a source of database connections.
+* Instead of using DriverManager to get a connection, Spring (and modern Java applications) use a DataSource for connection pooling and better resource management.
+
+---
+
+ ✅ Purpose of setDataSource() in Spring JDBC
+
+The setDataSource() method:
+
+* Is used by Spring to inject the configured DataSource into components like JdbcTemplate.
+* Once injected, the JdbcTemplate or DAO can use it to obtain database connections and execute SQL queries.
+
+---
+
+ 🔧 Example: Using setDataSource() in a DAO
+
+java
+public class UserDao {
+    private JdbcTemplate jdbcTemplate;
+
+    public void setDataSource(DataSource dataSource) {
+        this.jdbcTemplate = new JdbcTemplate(dataSource);
+    }
+
+    // Other methods using jdbcTemplate to query/update the database
+}
+
+
+Or, in XML configuration:
+
+xml
+<bean id="userDao" class="com.example.UserDao">
+    <property name="dataSource" ref="myDataSource"/>
+</bean>
+
+<bean id="myDataSource" class="org.apache.commons.dbcp2.BasicDataSource">
+    <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
+    <property name="url" value="jdbc:mysql://localhost:3306/mydb"/>
+    <property name="username" value="root"/>
+    <property name="password" value="password"/>
+</bean>
+
+
+Spring will call setDataSource() and pass the myDataSource bean into your UserDao.
+
+---
+
+ 🔄 In Modern Spring (Using Annotations)
+
+java
+@Repository
+public class UserDao {
+
+    private final JdbcTemplate jdbcTemplate;
+
+    @Autowired
+    public UserDao(DataSource dataSource) {
+        this.jdbcTemplate = new JdbcTemplate(dataSource);
+    }
+}
+
+
+This removes the need for an explicit setDataSource() setter — Spring uses constructor injection instead.
+
+---
+
+ Summary
+
+* setDataSource(DataSource ds) is a setter method to provide a DataSource to a Spring-managed bean.
+* It allows the component (like JdbcTemplate) to connect to the database.
+* Used in older XML-based configuration, or when using setter injection.
+
+Let me know if you want a runnable example with database setup!

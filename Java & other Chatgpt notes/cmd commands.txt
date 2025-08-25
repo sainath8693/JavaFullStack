@@ -1,0 +1,148 @@
+Here’s a list of some important and commonly used Windows Command Prompt commands that can help you navigate and manage your system:
+
+### File & Directory Management:
+1. cd — Change Directory  
+   - cd <path>: Changes the current directory.
+   - Example: cd C:\Users\octashop
+
+2. dir — List Files and Folders  
+   - dir: Displays the contents of the current directory.
+   - dir /w: Lists files and directories in a wide format.
+
+3. mkdir — Create a New Directory  
+   - mkdir <folder_name>: Creates a new folder in the current directory.
+   - Example: mkdir new_folder
+
+4. rmdir — Remove Directory  
+   - rmdir <folder_name>: Deletes a directory (it must be empty).
+   - Example: rmdir old_folder
+
+5. del — Delete Files  
+   - del <filename>: Deletes a specific file.
+   - Example: del file.txt
+
+6. move — Move or Rename Files  
+   - move <source> <destination>: Moves or renames a file.
+   - Example: move file.txt C:\Users\octashop\Documents
+
+7. copy — Copy Files  
+   - copy <source> <destination>: Copies files.
+   - Example: copy file.txt C:\Users\octashop\Documents
+
+8. xcopy — Copy Files and Directories  
+   - xcopy <source> <destination> /s /e: Copies files and directories, including subdirectories.
+   - Example: xcopy C:\Users\octashop\Desktop D:\Backup /s /e
+
+9. ren — Rename Files or Directories  
+   - ren <old_name> <new_name>: Renames a file or directory.
+   - Example: ren file.txt new_file.txt
+
+10. attrib — Change File Attributes  
+    - attrib <filename>: Displays the file's attributes (like read-only, hidden).
+    - Example: attrib +h file.txt (sets file as hidden)
+
+---
+
+### System Information & Control:
+1. cls — Clear Screen  
+   - Clears the Command Prompt window.
+
+2. exit — Exit Command Prompt  
+   - Closes the Command Prompt window.
+
+3. tasklist — List Running Processes  
+   - Shows a list of all currently running processes.
+   
+4. taskkill — Kill a Process  
+   - taskkill /f /im <process_name>: Terminates a specific process.
+   - Example: taskkill /f /im notepad.exe
+
+5. systeminfo — Display System Information  
+   - Shows detailed information about the system (e.g., OS, build, memory, etc.).
+
+6. hostname — Display Computer's Name  
+   - Displays the name of the current computer.
+
+7. ipconfig — Display IP Configuration  
+   - Shows your network configuration (IP address, subnet mask, etc.).
+   - ipconfig /all: Displays detailed network information.
+
+8. ping — Test Network Connectivity  
+   - ping <hostname_or_ip>: Tests if you can reach a remote host or IP address.
+   - Example: ping google.com
+
+9. shutdown — Shut Down or Restart the Computer  
+   - shutdown /s /f /t <time>: Shuts down the system after the specified time.
+   - shutdown /r: Restarts the system.
+
+---
+
+### File Searching & Comparison:
+1. find — Search for a String in a File  
+   - find "<string>" <file>: Searches for a string within a file.
+   - Example: find "hello" file.txt
+
+2. findstr — Search for a Pattern in Files  
+   - More advanced than find, allows for regular expressions.
+   - Example: findstr "error" *.log (search for "error" in all .log files)
+
+3. fc — Compare Files  
+   - fc <file1> <file2>: Compares two files and displays their differences.
+
+---
+
+### User & Group Management:
+1. net user — User Account Management  
+   - net user <username> <password> /add: Creates a new user account.
+   - Example: net user octashop password123 /add
+
+2. net localgroup — Manage User Groups  
+   - net localgroup <group_name> <username> /add: Adds a user to a local group.
+   - Example: net localgroup administrators octashop /add
+
+---
+
+### Disk & Storage Management:
+1. chkdsk — Check Disk for Errors  
+   - chkdsk <drive_letter>: /f: Scans and fixes errors on the specified drive.
+   - Example: chkdsk C: /f
+
+2. diskpart — Disk Partitioning Tool  
+   - Used for advanced disk management (be careful when using this).
+   - Type diskpart to start and then use commands like list disk, select disk, clean, etc.
+
+3. format — Format a Disk or Drive  
+   - format <drive_letter>: /fs:<filesystem>: Formats a drive.
+   - Example: format D: /fs:NTFS
+
+---
+
+### Network Commands:
+1. netstat — Display Network Connections and Stats  
+   - netstat -a: Shows all active connections and listening ports.
+   
+2. tracert — Trace Route to a Host  
+   - tracert <hostname_or_ip>: Traces the path your network traffic takes to reach a remote host.
+   - Example: tracert google.com
+
+3. nslookup — DNS Lookup  
+   - nslookup <domain>: Queries DNS for information about a domain.
+   - Example: nslookup google.com
+
+---
+
+### Miscellaneous:
+1. echo — Display a Message or Set a Variable  
+   - echo Hello World: Displays a message.
+   - echo %variable_name%: Displays the value of an environment variable.
+
+2. set — Set or Display Environment Variables  
+   - set <variable_name>=<value>: Sets a variable.
+   - Example: set MY_VAR=123
+
+3. pause — Pause the Execution of a Command  
+   - Pauses the batch file or script execution until the user presses a key.
+
+---
+
+These are just some of the essential commands you’ll often use in the Windows Command Prompt. Let me know if you want more details on any specific command or need examples!

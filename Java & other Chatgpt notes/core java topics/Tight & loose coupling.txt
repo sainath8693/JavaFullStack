@@ -1,0 +1,88 @@
+Tight coupling in Java (or in any object-oriented programming language) refers to a situation where one class or component is highly dependent on another. In other words, the two classes are so closely linked that changes in one class may require changes in the other, making the system less flexible and harder to maintain. Tight coupling creates a scenario where the classes have a high degree of interdependence, often making code more difficult to test, modify, or scale.
+
+### Characteristics of Tight Coupling:
+1. **Direct Dependencies**: One class directly creates, modifies, or interacts with objects of another class. For example, if Class A creates an instance of Class B using `new` within its constructor, it's tightly coupled to Class B.
+  
+   ```java
+   class ClassA {
+       private ClassB classB = new ClassB();  // tight coupling
+
+       public void doSomething() {
+           classB.someMethod();
+       }
+   }
+   ```
+
+2. **Changes to One Class Affect Others**: If Class A uses methods or fields from Class B directly and Class B changes, Class A may break or need to be modified.
+
+3. **Difficult Testing**: It's difficult to mock or replace dependencies when performing unit tests. Because Class A directly depends on Class B, testing Class A may require an actual instance of Class B, even if you want to isolate your tests.
+
+### Example of Tight Coupling:
+Let's consider the following scenario where one class directly uses another class:
+
+```java
+class Engine {
+    void start() {
+        System.out.println("Engine is starting...");
+    }
+}
+
+class Car {
+    private Engine engine;
+
+    public Car() {
+        engine = new Engine();  // Direct dependency (tight coupling)
+    }
+
+    public void startCar() {
+        engine.start();  // Using Engine directly
+    }
+}
+```
+
+Here, the `Car` class is tightly coupled to the `Engine` class because it directly creates an instance of `Engine`. If we want to change how `Engine` works or even swap it for a different type of engine, we'd need to modify the `Car` class.
+
+### Loose Coupling (Opposite of Tight Coupling):
+Loose coupling is the concept where classes or components are designed to minimize dependencies between them. This is often achieved by using techniques such as dependency injection or interfaces, which allow classes to interact with each other through abstractions rather than direct dependencies.
+
+For example, using **interfaces** or **dependency injection**:
+
+```java
+interface Engine {
+    void start();
+}
+
+class ElectricEngine implements Engine {
+    public void start() {
+        System.out.println("Electric engine is starting...");
+    }
+}
+
+class Car {
+    private Engine engine;
+
+    public Car(Engine engine) {
+        this.engine = engine;  // Dependency injection (loose coupling)
+    }
+
+    public void startCar() {
+        engine.start();
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Engine engine = new ElectricEngine();
+        Car car = new Car(engine);
+        car.startCar();
+    }
+}
+```
+In this example, the `Car` class is **loosely coupled** to the `Engine` class because it doesn't directly create an instance of the `Engine` class. Instead, it relies on an `Engine` instance that is passed to it (dependency injection). This allows you to easily switch to a different type of engine (like `GasolineEngine`) without changing the `Car` class.
+
+### Why Avoid Tight Coupling:
+- **Flexibility**: Loose coupling increases flexibility, as you can swap implementations without modifying the dependent class.
+- **Testability**: Loose coupling makes unit testing easier because you can mock or stub dependencies more easily.
+- **Maintainability**: Loose coupling leads to easier maintenance and scalability, as changes in one class don't necessarily break others.
+
+In summary, tight coupling is when classes are too dependent on each other, making it harder to make changes, test, and maintain the system. It's often better to aim for loose coupling to make your code more modular and flexible.

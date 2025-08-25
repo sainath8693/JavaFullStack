@@ -1,0 +1,192 @@
+Sure! Here's a one-line explanation with an example for each commonly used StringBuffer method in Java:
+
+---
+
+ 🔧 Mutating Methods
+
+1. append(String str) – Adds the given string to the end.
+
+   java
+   new StringBuffer("Hello").append(" World"); // "Hello World"
+   
+
+2. insert(int offset, String str) – Inserts a string at the specified index.
+
+   java
+   new StringBuffer("Hello").insert(5, " Java"); // "Hello Java"
+   
+
+3. replace(int start, int end, String str) – Replaces characters from start to end with the given string.
+
+   java
+   new StringBuffer("Hello World").replace(6, 11, "Java"); // "Hello Java"
+   
+
+4. delete(int start, int end) – Deletes characters from start to end - 1.
+
+   java
+   new StringBuffer("Hello Java").delete(5, 6); // "HelloJava"
+   
+
+5. deleteCharAt(int index) – Deletes the character at the given index.
+
+   java
+   new StringBuffer("Hello").deleteCharAt(1); // "Hllo"
+   
+
+6. reverse() – Reverses the character sequence.
+
+   java
+   new StringBuffer("Hello").reverse(); // "olleH"
+   
+
+7. setCharAt(int index, char ch) – Changes the character at a specific index.
+
+   java
+   StringBuffer sb = new StringBuffer("Help");
+   sb.setCharAt(1, 'a'); // "Halp"
+   
+
+8. setLength(int newLength) – Sets the length of the buffer (truncates or pads with null).
+
+   java
+   StringBuffer sb = new StringBuffer("Hello");
+   sb.setLength(3); // "Hel"
+   
+
+---
+
+ 🔍 Query Methods
+
+9. length() – Returns the number of characters.
+
+   java
+   new StringBuffer("Hello").length(); // 5
+   
+
+10. capacity() – Returns the current capacity.
+
+    java
+    new StringBuffer().capacity(); // Typically 16 (default)
+    
+
+11. charAt(int index) – Gets the character at the given index.
+
+    java
+    new StringBuffer("Hello").charAt(1); // 'e'
+    
+
+12. substring(int start) – Returns substring from start to end.
+
+    java
+    new StringBuffer("Hello").substring(2); // "llo"
+    
+
+13. substring(int start, int end) – Returns substring from start to end-1.
+
+    java
+    new StringBuffer("Hello").substring(1, 4); // "ell"
+    
+
+14. indexOf(String str) – Returns index of the first occurrence.
+
+    java
+    new StringBuffer("Hello World").indexOf("World"); // 6
+    
+
+15. lastIndexOf(String str) – Returns index of the last occurrence.
+
+    java
+    new StringBuffer("ababcab").lastIndexOf("ab"); // 5
+    
+
+16. toString() – Converts StringBuffer to a String.
+
+    java
+    new StringBuffer("Hello").toString(); // "Hello"
+    
+
+---
+
+ ⚙️ Capacity Management
+
+17. ensureCapacity(int minCapacity) – Ensures minimum buffer capacity.
+
+    java
+    StringBuffer sb = new StringBuffer();
+    sb.ensureCapacity(50); // Ensures capacity is at least 50
+    
+
+18. trimToSize() – Trims the buffer size to current length.
+
+    java
+    StringBuffer sb = new StringBuffer("Hello");
+    sb.trimToSize(); // Capacity now equals length
+    
+
+---
+
+Let me know if you want this in a downloadable table or a code snippet file.
+==========================================================================================
+StringBuffer in Java is a mutable sequence of characters. Unlike String, which is immutable, StringBuffer allows you to modify the contents of a string without creating a new object each time. This makes it more efficient when you need to make many modifications to a string.
+
+Here are the most commonly used methods in the StringBuffer class:
+
+---
+
+### 📌 Basic Methods
+
+| Method                                    | Description                                                          |
+| ----------------------------------------- | -------------------------------------------------------------------- |
+| append(String str)                      | Adds the specified string to the end of the current buffer.          |
+| insert(int offset, String str)          | Inserts the string at the specified position.                        |
+| replace(int start, int end, String str) | Replaces characters between start and end with the given string. |
+| delete(int start, int end)              | Deletes characters from start to end-1.                          |
+| deleteCharAt(int index)                 | Deletes the character at the specified index.                        |
+| reverse()                               | Reverses the sequence of characters.                                 |
+| setCharAt(int index, char ch)           | Sets the character at the specified index.                           |
+| setLength(int newLength)                | Changes the length of the buffer.                                    |
+
+---
+
+### 📌 Information Methods
+
+| Method                          | Description                                                 |
+| ------------------------------- | ----------------------------------------------------------- |
+| length()                      | Returns the number of characters in the buffer.             |
+| capacity()                    | Returns the current capacity of the buffer.                 |
+| charAt(int index)             | Returns the character at the specified index.               |
+| substring(int start)          | Returns a substring starting from the specified index.      |
+| substring(int start, int end) | Returns a substring between start and end.              |
+| indexOf(String str)           | Returns the index of the first occurrence of the substring. |
+| lastIndexOf(String str)       | Returns the index of the last occurrence.                   |
+| toString()                    | Converts the StringBuffer to a String.                  |
+
+---
+
+### 📌 Capacity and Performance
+
+| Method                                | Description                                                                |
+| ------------------------------------- | -------------------------------------------------------------------------- |
+| ensureCapacity(int minimumCapacity) | Ensures that the capacity is at least equal to the specified minimum.      |
+| trimToSize()                        | Reduces the storage used for the character sequence to the current length. |
+
+---
+
+### 🔍 Example Usage
+
+java
+StringBuffer sb = new StringBuffer("Hello");
+sb.append(" World");              // "Hello World"
+sb.insert(5, ",");                // "Hello, World"
+sb.replace(6, 11, "Java");        // "Hello, Java"
+sb.delete(5, 6);                  // "Hello Java"
+sb.reverse();                     // "avaJ olleH"
+System.out.println(sb.toString());
+
+
+---
+
+If you’re working in a single-threaded environment, StringBuilder is a faster alternative to StringBuffer because it’s not synchronized.
+
+Let me know if you want code examples for each method or a comparison with StringBuilder.

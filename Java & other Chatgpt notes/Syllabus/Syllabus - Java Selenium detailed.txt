@@ -1,0 +1,211 @@
+Here's a detailed syllabus for Java Selenium Automation that covers beginner to advanced topics. This syllabus is ideal for someone preparing for automation roles, certifications, or aiming to implement a full testing framework.
+
+---
+
+ 📘 1. Core Java for Selenium (Pre-requisite)
+
+Understanding Java is essential before diving into Selenium.
+
+# 1.1 Java Basics
+
+* Data types, variables, operators
+* Control statements (if, switch, loops)
+* Arrays and Strings
+
+# 1.2 Object-Oriented Programming
+
+* Classes and Objects
+* Constructors
+* Inheritance
+* Polymorphism (compile-time and runtime)
+* Abstraction and Encapsulation
+* Interfaces and Abstract classes
+
+# 1.3 Collections Framework
+
+* List, Set, Map
+* Iterator, ListIterator
+* Generics
+
+# 1.4 Exception Handling
+
+* Try-catch-finally
+* Throw and throws
+* Custom exceptions
+
+# 1.5 File Handling
+
+* FileReader, FileWriter
+* BufferedReader, BufferedWriter
+* Properties file
+
+# 1.6 Java 8 Features (Optional but Useful)
+
+* Lambda expressions
+* Streams API
+* Functional interfaces
+
+---
+
+ 🧪 2. Selenium WebDriver
+
+# 2.1 Selenium Introduction
+
+* What is Selenium?
+* Components of Selenium
+* Selenium vs other tools
+
+# 2.2 Selenium WebDriver Architecture
+
+* Browser drivers
+* JSON Wire Protocol / W3C Protocol
+
+# 2.3 Setting up Selenium
+
+* Installing JDK
+* Configuring Eclipse/IntelliJ
+* Adding Selenium JARs
+* WebDriverManager
+
+# 2.4 Locators in Selenium
+
+* ID, Name, ClassName
+* LinkText, PartialLinkText
+* TagName
+* XPath (absolute/relative)
+* CSS Selector
+
+# 2.5 WebDriver Commands
+
+* Browser operations (get, close, quit)
+* Navigation commands
+* Get page title, URL, source
+* WebElement commands (click, sendKeys, getText)
+* isDisplayed, isEnabled, isSelected
+
+# 2.6 Advanced User Interactions
+
+* Mouse and keyboard actions using Actions class
+* Drag and drop
+* Right click, double click, hover
+
+# 2.7 Handling Web Elements
+
+* Drop-downs with Select class
+* Alerts
+* Frames and Windows handling
+* Tables (dynamic/static)
+
+# 2.8 Waits in Selenium
+
+* Implicit Wait
+* Explicit Wait
+* Fluent Wait
+
+---
+
+ 🔁 3. TestNG Framework
+
+* Installation and configuration
+* Annotations (@BeforeMethod, @AfterMethod, etc.)
+* TestNG XML file
+* Grouping, prioritization
+* Parallel execution
+* Data Providers
+* Assertions and Listeners
+* Generating HTML reports
+
+---
+
+ 🧰 4. Automation Framework Development
+
+# 4.1 Framework Types
+
+* Modular Framework
+* Data-Driven Framework
+* Keyword-Driven Framework
+* Hybrid Framework
+* Page Object Model (POM)
+
+# 4.2 Page Object Model (POM)
+
+* Creating page classes
+* Maintaining locators and actions
+* Page Factory vs Plain POM
+
+# 4.3 Utilities and Helper Classes
+
+* Excel handling (Apache POI)
+* Log4j Logging
+* Configuration Management (Properties file)
+
+# 4.4 Assertion and Reporting
+
+* TestNG assertions
+* ExtentReports or Allure Reports
+
+# 4.5 Continuous Integration (CI)
+
+* Introduction to Jenkins
+* Creating and configuring jobs
+* Git integration with Jenkins
+* Triggering automation from Jenkins
+
+---
+
+ 🌐 5. Advanced Selenium & Tools Integration
+
+# 5.1 Selenium Grid
+
+* Hub-node configuration
+* Remote WebDriver
+
+# 5.2 Cross-Browser Testing
+
+* Chrome, Firefox, Edge drivers
+* WebDriverManager usage
+
+# 5.3 Headless Browser Testing
+
+* Using Chrome/Firefox in headless mode
+
+# 5.4 Database Testing
+
+* Connecting to MySQL/Oracle
+* JDBC setup and queries
+
+# 5.5 API Testing Integration
+
+* Basics of REST APIs
+* Using REST Assured for API Automation
+
+# 5.6 Cucumber – BDD Framework (Optional)
+
+* Gherkin Syntax
+* Feature files and step definitions
+* Integration with Selenium and TestNG
+
+---
+
+ 🧪 6. Interview Prep & Real-World Projects
+
+* Writing automation test cases for real websites (e.g., Amazon, Flipkart)
+* Real-time scenarios (login, form submission, data-driven tests)
+* Handling dynamic elements
+* Resume & GitHub portfolio building
+* Selenium-based project end-to-end
+
+---
+
+ Tools to Learn Alongside
+
+* Maven (Build tool)
+* Git & GitHub (Version control)
+* Jenkins (CI/CD)
+* IntelliJ/Eclipse (IDE)
+* Postman (API Testing)
+* Docker (optional for grid)
+
+---
+
+Would you like a downloadable PDF or an editable format (like Excel or Word) of this syllabus?

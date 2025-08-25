@@ -1,0 +1,106 @@
+Great! Let’s now break down @Controller the same simple way as the others (@Component, @Service, @Repository).
+
+---
+
+ 🟠 What is @Controller?
+
+@Controller is used to define a class that handles web requests (HTTP requests).
+
+It tells Spring:
+
+> “This class is a web controller. Use it to receive and respond to HTTP requests like /login, /users, etc.”
+
+It is also a special type of @Component, designed for handling web input/output.
+
+---
+
+ 🔧 Why use @Controller?
+
+You use @Controller when:
+
+* You are building a web application using Spring MVC.
+* You want to create REST APIs or web pages that users or clients (like Postman or frontend apps) can call.
+* You want to process input (like form data or JSON) and return a response.
+
+---
+
+ ✅ Simple Example
+
+java
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+@Controller
+public class HelloController {
+
+    @GetMapping("/hello")
+    @ResponseBody  // Tells Spring to return text, not a view
+    public String sayHello() {
+        return "Hello from Spring!";
+    }
+}
+
+
+If you start your Spring Boot app and open http://localhost:8080/hello, you’ll see:
+
+
+Hello from Spring!
+
+
+---
+
+ 🟡 Important: @Controller vs @RestController
+
+| Annotation        | Used For                   | Returns                |
+| ----------------- | -------------------------- | ---------------------- |
+| @Controller     | Web pages (like Thymeleaf) | Views (HTML templates) |
+| @RestController | REST APIs (JSON data)      | JSON, Strings, etc.    |
+
+When building REST APIs, we mostly use @RestController, which is:
+
+java
+@RestController = @Controller + @ResponseBody
+
+
+---
+
+ 💡 Real-World Structure Example
+
+java
+@Controller
+public class UserController {
+
+    private final UserService userService;
+
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
+
+    @GetMapping("/create-user")
+    @ResponseBody
+    public String createUser() {
+        userService.createUser("John");
+        return "User created!";
+    }
+}
+
+
+* @Controller: handles the web request (/create-user)
+* It calls UserService (business logic)
+* Which then calls UserRepository (database logic)
+
+This is layered architecture in action!
+
+---
+
+ 🧠 Summary
+
+* ✅ @Controller handles web requests
+* ✅ Automatically picked up by Spring Boot
+* ✅ Can return web pages or data
+* ✅ Use @RestController if you're building APIs (to return JSON)
+
+---
+
+Would you like a working example of all 4 annotations together in one small app (@Controller, @Service, @Repository, @Component)?

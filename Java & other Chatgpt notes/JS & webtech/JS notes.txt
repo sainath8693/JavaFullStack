@@ -1,0 +1,48 @@
+# variables 
+- 3 types
+* let - we can reassing the value but can not redeclare
+* var - we can redeclare and reassign
+* const - can't redeclare and reassign.
+
+# Scopes : 
+* global scope & block scope
+* functional scope - var has functional scope 
+* block scope - let &  const have block scope
+
+# Data types :
+
+* Primitive data types
+1 Number  - 56456 , 14.7
+2 String	- any thing inside ' single' or  "double" quotes. 
+3 Boolean 	- true, false
+4 Bigint	- 10256n  or  bigint(12544)
+5 Null 	- 
+6 undefined- A variable declared but not assigned a value.
+7 symbol  -  Unique and immutable value, mostly for object keys.
+
+
+
+* Non primitive data types
+1 object	- { name: "John", age: 30 }
+2 Array	- [1, 2, 3]
+3 Function - 	function() {}
+4 Date - new Date()	
+5 RegExp	:  /ab+c/	
+
+
+# Type conversion
+1 value to String :	String(value) or  value.toString()
+2 value to Number 	Number(value)
+3 value to Boolean	Boolean(value)
+
+- if we convert the value into Boolean its data type will become true or false
+* truthy: any String value or number we convert into boolean it will be truly
+* falsy : 0, -0, null for this values we will get false
+
+
+
+
+
+
+
+

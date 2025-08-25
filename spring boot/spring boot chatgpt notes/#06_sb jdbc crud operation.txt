@@ -1,0 +1,253 @@
+Here’s a simple and detailed explanation of CRUD operations using Java Spring Boot with JDBC — perfect for beginners.
+
+---
+
+## 🔧 What is CRUD?
+
+CRUD stands for:
+
+* Create → Insert new data into the database.
+* Read → Get data from the database.
+* Update → Modify existing data.
+* Delete → Remove data from the database.
+
+---
+
+## 📦 What is Spring Boot?
+
+Spring Boot is a framework to build Java applications quickly with minimal configuration. It helps:
+
+* Set up web servers easily.
+* Connect to databases.
+* Handle REST APIs.
+
+---
+
+## 📚 What is JDBC?
+
+JDBC (Java Database Connectivity) is the standard way to connect Java programs with databases. It lets you send SQL queries from Java to the database.
+
+---
+
+## ✅ Tools You Need
+
+* Java (JDK 17+ preferred)
+* Spring Boot (using Spring Initializr)
+* MySQL or any RDBMS
+* IDE (like IntelliJ, Eclipse, or VS Code)
+* Postman (for testing API)
+
+---
+
+## 🧱 Step-by-Step CRUD Example
+
+Let’s build a simple Student management system.
+
+### 1. Set Up Spring Boot Project
+
+Go to: [https://start.spring.io](https://start.spring.io)
+
+Choose:
+
+* Project: Maven
+* Language: Java
+* Dependencies:
+
+  * Spring Web
+  * Spring JDBC
+  * MySQL Driver
+
+Click Generate, unzip and open in your IDE.
+
+---
+
+### 2. Configure application.properties
+
+properties
+spring.datasource.url=jdbc:mysql://localhost:3306/your_db_name
+spring.datasource.username=root
+spring.datasource.password=your_password
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+
+
+> ⚠️ Make sure your MySQL DB is running, and the database exists.
+
+---
+
+### 3. Create Database Table (MySQL)
+
+sql
+CREATE TABLE student (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  name VARCHAR(100),
+  email VARCHAR(100)
+);
+
+
+---
+
+### 4. Create Model Class
+
+java
+// Student.java
+public class Student {
+    private int id;
+    private String name;
+    private String email;
+
+    // Getters and setters
+}
+
+
+---
+
+### 5. Create RowMapper
+
+RowMapper converts a database row into a Java object.
+
+java
+// StudentRowMapper.java
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import org.springframework.jdbc.core.RowMapper;
+
+public class StudentRowMapper implements RowMapper<Student> {
+    @Override
+    public Student mapRow(ResultSet rs, int rowNum) throws SQLException {
+        Student s = new Student();
+        s.setId(rs.getInt("id"));
+        s.setName(rs.getString("name"));
+        s.setEmail(rs.getString("email"));
+        return s;
+    }
+}
+
+
+---
+
+### 6. Create DAO (Data Access Object)
+
+java
+// StudentDAO.java
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
+import java.util.List;
+
+@Repository
+public class StudentDAO {
+
+    @Autowired
+    private JdbcTemplate jdbc;
+
+    // Create
+    public int addStudent(Student s) {
+        String sql = "INSERT INTO student (name, email) VALUES (?, ?)";
+        return jdbc.update(sql, s.getName(), s.getEmail());
+    }
+
+    // Read
+    public List<Student> getAllStudents() {
+        String sql = "SELECT * FROM student";
+        return jdbc.query(sql, new StudentRowMapper());
+    }
+
+    // Read by ID
+    public Student getStudentById(int id) {
+        String sql = "SELECT * FROM student WHERE id = ?";
+        return jdbc.queryForObject(sql, new StudentRowMapper(), id);
+    }
+
+    // Update
+    public int updateStudent(Student s) {
+        String sql = "UPDATE student SET name = ?, email = ? WHERE id = ?";
+        return jdbc.update(sql, s.getName(), s.getEmail(), s.getId());
+    }
+
+    // Delete
+    public int deleteStudent(int id) {
+        String sql = "DELETE FROM student WHERE id = ?";
+        return jdbc.update(sql, id);
+    }
+}
+
+
+---
+
+### 7. Create REST Controller
+
+java
+// StudentController.java
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+import java.util.List;
+
+@RestController
+@RequestMapping("/students")
+public class StudentController {
+
+    @Autowired
+    private StudentDAO studentDAO;
+
+    // Create
+    @PostMapping
+    public String addStudent(@RequestBody Student s) {
+        studentDAO.addStudent(s);
+        return "Student added successfully!";
+    }
+
+    // Read All
+    @GetMapping
+    public List<Student> getStudents() {
+        return studentDAO.getAllStudents();
+    }
+
+    // Read by ID
+    @GetMapping("/{id}")
+    public Student getStudent(@PathVariable int id) {
+        return studentDAO.getStudentById(id);
+    }
+
+    // Update
+    @PutMapping
+    public String updateStudent(@RequestBody Student s) {
+        studentDAO.updateStudent(s);
+        return "Student updated!";
+    }
+
+    // Delete
+    @DeleteMapping("/{id}")
+    public String deleteStudent(@PathVariable int id) {
+        studentDAO.deleteStudent(id);
+        return "Student deleted!";
+    }
+}
+
+
+---
+
+### 🔍 Testing the API
+
+You can test using Postman:
+
+* POST /students → Add new student
+* GET /students → View all students
+* GET /students/{id} → View one student
+* PUT /students → Update student
+* DELETE /students/{id} → Delete student
+
+---
+
+## ✅ Summary
+
+| Operation | HTTP Method | Endpoint         | Description      |
+| --------- | ----------- | ---------------- | ---------------- |
+| Create    | POST        | /students      | Add new student  |
+| Read      | GET         | /students      | Get all students |
+| Read      | GET         | /students/{id} | Get one student  |
+| Update    | PUT         | /students      | Update student   |
+| Delete    | DELETE      | /students/{id} | Delete student   |
+
+---
+
+Would you like this in PDF format or want to extend this with Exception Handling, DTOs, or Validation?

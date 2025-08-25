@@ -1,0 +1,96 @@
+In Java multithreading, the sleep() method is used to pause the execution of the current thread for a specified amount of time. This can be helpful in various situations, such as simulating delays, giving other threads a chance to execute, or avoiding CPU overuse.
+
+---
+
+### ✅ Method Signature
+
+The sleep() method is a static method of the Thread class:
+
+java
+public static void sleep(long millis) throws InterruptedException
+public static void sleep(long millis, int nanos) throws InterruptedException
+
+
+* millis — the time to sleep in milliseconds
+* nanos — additional time to sleep in nanoseconds (0 to 999999)
+
+---
+
+### 🔧 How It Works
+
+When Thread.sleep() is called:
+
+1. The current thread enters a "Timed Waiting" state.
+2. It is not running, but not dead.
+3. After the specified time has passed, the thread becomes Runnable again and is eligible for CPU scheduling.
+
+> Note: Sleeping thread doesn't lose ownership of any monitors (locks) it holds.
+
+---
+
+### 🛑 InterruptedException
+
+The sleep() method throws InterruptedException, which must be handled using a try-catch block or declared using throws.
+
+This exception occurs if:
+
+* Another thread interrupts the sleeping thread using interrupt().
+
+---
+
+### 📘 Example
+
+java
+public class SleepExample extends Thread {
+    public void run() {
+        for (int i = 1; i <= 5; i++) {
+            try {
+                // Sleep for 1 second (1000 milliseconds)
+                Thread.sleep(1000);
+                System.out.println(i);
+            } catch (InterruptedException e) {
+                System.out.println("Thread interrupted: " + e);
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        SleepExample t1 = new SleepExample();
+        t1.start();
+    }
+}
+
+
+Output (approximately 1 second delay between each number):
+
+
+1
+2
+3
+4
+5
+
+
+---
+
+### 📌 Important Notes
+
+* Thread.sleep() only pauses the current thread.
+* The thread resumes automatically after the time elapses — no need for wake-up.
+* It does not release any locks it holds.
+* Ideal for delays or simple scheduling, but not for synchronization.
+
+---
+
+### 🆚 wait() vs sleep()
+
+| Feature      | sleep()                        | wait()                                 |
+| ------------ | -------------------------------- | ---------------------------------------- |
+| Belongs to   | Thread class                   | Object class                           |
+| Lock release | Does not release the lock    | Releases the lock                    |
+| Usage        | For timing, delays               | For thread communication/synchronization |
+| Wake-up      | Automatically after time elapses | Must be notified by another thread       |
+
+---
+
+Let me know if you'd like a demo with multiple threads or more advanced use cases!

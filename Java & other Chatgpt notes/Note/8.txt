@@ -1,0 +1,12 @@
+default methods
+- default methods have body
+- from java 8 default methods are allowed in interface.
+eg. default void sayHello()
+{
+	syso();
+}
+============
+- create class and implement the interface now access the default method
+- we can call default method of interface with the help of child class object ref.
+- we can override default method
+- if we have 2 interface with same method name , form arg, then we can not call them we get CTE.

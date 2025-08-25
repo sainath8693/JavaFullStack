@@ -1,0 +1,123 @@
+git status
+git commit
+I
+initial commit
+Esc +: +w+q
+===
+
+touch - it is used to crate new blank file.
+touch contact.html
+touch about.html
+touch momentum.html
+==
+git status
+==
+to add multiple files at a time
+git add -A
+==
+git status
+==
+shortcut for commit
+git commit -m "write_your_message_here"
+==
+to match the last version of our file (i.e. undo/ retain in simple words)
+git checkout
+==
+to match previous version of files (if there are multiple files)
+git checkout -f
+==
+git log
+==
+log filter
+if we want to check only last 2 commits
+git log -p -2
+
+press Q for  quiet
+==
+to compare working directory with staging area
+git diff
+==
+To compare staging area with last commit
+git diff --staged
+==
+if we want to match staging area with our last commit 
+git checkout -f
+==
+if we want to auto commit
+git commit -a -m "skipped staging area and fixed auto commit"
+==
+if we want to remove file from working directory and commit area (completely delete)
+git rm  index.html
+==
+if we just want to remove file from staging area.
+- file will remain in woking directory and moved to untracked file
+git rm --cached  index.html
+==
+if we want an overview of working directory and git
+git status -s     or git status --short
+-it gives you a compact, easy-to-read summary of the status of your working directory and staging area.
+ M file1.txt
+A  file2.txt
+?? file3.txt
+
+here 
+First column: Status of the staging area (what's ready to be committed).
+
+
+Second column: Status of the working directory (changes not staged for commit)
+==
+1. Create a .gitignore File
+touch .gitignore
+
+2. Add Patterns to Ignore Files
+Inside .gitignore, you list the files/folders you want Git to ignore
+# Ignore a specific file
+secret.txt
+
+# Ignore all .log files
+*.log
+
+# Ignore all files in a folder
+node_modules/
+
+# Ignore a file in a specific folder
+temp/data.json
+
+# Ignore all .env files (common for secrets)
+.env
+note -Comments: Use # to add comments in .gitignore
+
+3. Commit the .gitignore File
+Git needs to know about the .gitignore file itself, so add and commit it:
+
+bash
+Copy
+Edit
+
+git add .gitignore
+git commit -m "Add .gitignore file"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+==

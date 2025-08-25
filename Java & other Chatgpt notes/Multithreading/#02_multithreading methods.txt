@@ -1,0 +1,134 @@
+In Java, threads allow concurrent execution of two or more parts of a program. The Thread class provides several methods to control and manage threads. Here's a simple explanation of the most commonly used thread methods:
+
+---
+
+## 🔧 Common Thread Methods in Java (with examples)
+
+ 1. start()
+
+* Purpose: Starts a new thread and calls the run() method.
+* Note: Don't call run() directly unless you want to run it like a normal method.
+* Example:
+
+  java
+  class MyThread extends Thread {
+      public void run() {
+          System.out.println("Thread is running...");
+      }
+  }
+
+  public class Main {
+      public static void main(String[] args) {
+          MyThread t1 = new MyThread();
+          t1.start();  // starts a new thread
+      }
+  }
+  
+
+---
+
+ 2. run()
+
+* Purpose: Contains the code that runs in the thread.
+* Note: You usually override this method.
+* Example:
+
+  java
+  public void run() {
+      System.out.println("This is the run method");
+  }
+  
+
+---
+
+ 3. sleep(milliseconds)
+
+* Purpose: Pauses the thread for a given time.
+* Throws: InterruptedException
+* Example:
+
+  java
+  try {
+      Thread.sleep(1000);  // sleep for 1 second
+  } catch (InterruptedException e) {
+      System.out.println(e);
+  }
+  
+
+---
+
+ 4. join()
+
+* Purpose: Waits for a thread to finish before continuing.
+* Example:
+
+  java
+  Thread t1 = new Thread(() -> {
+      System.out.println("Thread t1 is running");
+  });
+
+  t1.start();
+  t1.join(); // Main thread waits for t1 to finish
+  System.out.println("Main thread continues...");
+  
+
+---
+
+ 5. isAlive()
+
+* Purpose: Checks if a thread is still running.
+* Example:
+
+  java
+  Thread t1 = new Thread(() -> {
+      System.out.println("Thread running...");
+  });
+
+  t1.start();
+  System.out.println("Is thread alive? " + t1.isAlive());
+  
+
+---
+
+ 6. setName(String name) and getName()
+
+* Purpose: Set and get thread name.
+* Example:
+
+  java
+  Thread t1 = new Thread();
+  t1.setName("MyThread");
+  System.out.println("Thread name: " + t1.getName());
+  
+
+---
+
+ 7. setPriority(int priority)
+
+* Purpose: Sets the thread's priority (1 to 10).
+* Constants:
+
+  * Thread.MIN_PRIORITY (1)
+  * Thread.NORM_PRIORITY (5)
+  * Thread.MAX_PRIORITY (10)
+* Example:
+
+  java
+  Thread t1 = new Thread();
+  t1.setPriority(Thread.MAX_PRIORITY);
+  
+
+---
+
+ 8. yield()
+
+* Purpose: Causes the current thread to pause and allow other threads to execute.
+* Example:
+
+  java
+  Thread.yield();
+  
+
+---
+
+Would you like an example showing how multiple threads use these methods together in one program?

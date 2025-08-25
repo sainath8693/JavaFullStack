@@ -1,0 +1,225 @@
+Here’s a beginner-friendly guide to Hibernate Annotations in Java Spring Boot—explained in simple language with examples.
+
+---
+
+## 💡 What is Hibernate?
+
+Hibernate is a Java framework that helps you interact with a database by using Java objects. It hides the complexity of SQL and allows you to map Java classes to database tables.
+
+Spring Boot often uses Hibernate as part of Spring Data JPA.
+
+---
+
+## 🔖 What are Hibernate Annotations?
+
+Annotations in Hibernate are special keywords (marked with @) that you use in your Java classes to connect them with database tables and columns.
+
+---
+
+## 🏗️ Common Hibernate Annotations
+
+Let’s look at the most common ones, with simple meanings and examples.
+
+---
+
+### 1. @Entity
+
+* Tells Hibernate: “This class represents a database table.”
+
+java
+@Entity
+public class Student {
+    ...
+}
+
+
+---
+
+### 2. @Table(name = "students")
+
+* Optional. Used to give a specific table name. If not used, the table name will be the same as the class name.
+
+java
+@Entity
+@Table(name = "students")
+public class Student {
+    ...
+}
+
+
+---
+
+### 3. @Id
+
+* Marks the primary key field.
+
+java
+@Id
+private Long id;
+
+
+---
+
+### 4. @GeneratedValue
+
+* Tells Hibernate to auto-generate the ID.
+
+java
+@Id
+@GeneratedValue(strategy = GenerationType.IDENTITY)
+private Long id;
+
+
+GenerationType.IDENTITY is the most common strategy (auto-increment in most databases).
+
+---
+
+### 5. @Column
+
+* Maps a field to a specific column name. Optional if names match.
+
+java
+@Column(name = "student_name", nullable = false)
+private String name;
+
+
+You can specify:
+
+* name = column name
+* nullable = false = column must not be null
+* length = 50 = max length for strings
+
+---
+
+### 6. @OneToOne, @OneToMany, @ManyToOne, @ManyToMany
+
+* These define relationships between tables.
+
+#### Example: Many Students to One School
+
+java
+@ManyToOne
+@JoinColumn(name = "school_id") // foreign key
+private School school;
+
+
+---
+
+### 7. @JoinColumn
+
+* Specifies the foreign key column.
+
+---
+
+### 8. @Transient
+
+* Ignores a field; it will not be saved in the database.
+
+java
+@Transient
+private int temporaryData;
+
+
+---
+
+### 9. @Lob
+
+* Used to store large objects, like big texts or images.
+
+java
+@Lob
+private String description;
+
+
+---
+
+### 10. @Temporal
+
+* Used with Date/Time to define the correct format.
+
+java
+@Temporal(TemporalType.DATE)
+private Date dob;
+
+
+Options:
+
+* TemporalType.DATE → Only date
+* TemporalType.TIME → Only time
+* TemporalType.TIMESTAMP → Date and time
+
+---
+
+## ✅ Full Example
+
+java
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "students")
+public class Student {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(name = "student_name", nullable = false)
+    private String name;
+
+    @Column(length = 100)
+    private String email;
+
+    @ManyToOne
+    @JoinColumn(name = "school_id")
+    private School school;
+
+    @Transient
+    private int tempData;
+}
+
+
+---
+
+## 📦 Hibernate in Spring Boot Project
+
+In Spring Boot:
+
+* Add dependency in pom.xml:
+
+xml
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-data-jpa</artifactId>
+</dependency>
+
+
+* Add application.properties:
+
+properties
+spring.datasource.url=jdbc:mysql://localhost:3306/mydb
+spring.datasource.username=root
+spring.datasource.password=root
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+
+
+---
+
+## 🧠 Summary
+
+| Annotation                       | Purpose                      |
+| -------------------------------- | ---------------------------- |
+| @Entity                        | Maps class to DB table       |
+| @Table                         | Sets custom table name       |
+| @Id                            | Primary key                  |
+| @GeneratedValue                | Auto-generates IDs           |
+| @Column                        | Maps field to DB column      |
+| @ManyToOne, @OneToMany, etc. | Define relationships         |
+| @JoinColumn                    | Specifies foreign key column |
+| @Transient                     | Excludes field from DB       |
+| @Lob                           | Large object (text/blob)     |
+| @Temporal                      | For date/time fields         |
+
+---
+
+Would you like a PDF version, a diagram, or a simple mini-project example to go along with this?

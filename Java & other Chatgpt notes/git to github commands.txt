@@ -1,0 +1,18 @@
+# 1. Go to your local project folder
+cd my-local-project
+
+# 2. Initialize Git
+git init
+
+# 3. Add files and commit
+git add .
+git commit -m "Initial commit"
+
+# 4. Connect to GitHub remote repo (create it first on GitHub!)
+git remote add origin https://github.com/username/repo-name.git
+
+# 5. Pull from GitHub to sync (optional but safer if there's content)
+git pull origin main --allow-unrelated-histories
+
+# 6. Push your local code
+git push -u origin main
